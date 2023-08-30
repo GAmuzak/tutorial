@@ -10,25 +10,9 @@ import java.time.LocalDate;
 import java.util.List;
 
 @SpringBootApplication
-@RestController
 public class TutorialApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(TutorialApplication.class, args);
 	}
-
-	@GetMapping
-	public List<Student> hello(){
-		return List.of(
-				new Student(
-						1L,
-						"Rishav",
-						22,
-						LocalDate.of(2000,10,17),
-						"rishav3141@gmail.com"
-				)
-		);
-	}
-
-
 }
