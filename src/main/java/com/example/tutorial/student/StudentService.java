@@ -34,4 +34,17 @@ public class StudentService {
         if(!exists) throw new IllegalStateException("Student with id " + studentId+ " does not exist!");
         studentRepository.deleteById(studentId);
     }
+
+    @Transactional
+    public void updateStudent(Long studentId, String newName, String newEmail){
+        Student student = studentRepository.findById(studentId).orElseThrow(()-> new IllegalStateException("Student with id " + studentId+ " does not exist!"));
+        if(newName!=null && !newName.isEmpty()) {
+            student.setName(newName);
+        }
+        if(newEmail!=null && !newEmail.isEmpty()){
+            Optional<Student> present = studentRepository.findStudentByEmail(newEmail);
+            if(present.isPresent()) throw new IllegalStateException("Email already taken!");
+            student.setEmail(newEmail);
+        }
+    }
 }
