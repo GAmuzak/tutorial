@@ -1,12 +1,20 @@
 package com.example.tutorial.student;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.time.LocalDate;
 import java.time.Period;
 
 @Entity
 @Table
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@ToString
 public class Student {
     @Id
     @SequenceGenerator(
@@ -24,74 +32,7 @@ public class Student {
     private LocalDate dob;
     private String email;
 
-    @Transient
-    private int age;
-
-    public Student() {
-    }
-
-    public Student(Long id,
-                   String name,
-                   LocalDate dob,
-                   String email) {
-        this.id = id;
-        this.name = name;
-        this.dob = dob;
-        this.email = email;
-    }
-
-    public Student(String name,
-                   LocalDate dob,
-                   String email) {
-        this.name = name;
-        this.dob = dob;
-        this.email = email;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getAge() {
         return Period.between(dob, LocalDate.now()).getYears();
-    }
-
-    public LocalDate getDob() {
-        return dob;
-    }
-
-    public void setDob(LocalDate dob) {
-        this.dob = dob;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    @Override
-    public String toString() {
-        return "Student{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                ", dob=" + dob +
-                ", email='" + email + '\'' +
-                '}';
     }
 }
